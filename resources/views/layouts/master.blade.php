@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- script -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
-    <!-- header -->
-    @include('partial._header')
-    @include('partial._navbar')
-    @yield('content')
+    <div id="app">
+        <!-- header -->
+        @include('partial._main-navbar')
+        @include('partial._header')
+        @include('partial._navbar')
+        @yield('content')
+    </div>
 
 
 </body>

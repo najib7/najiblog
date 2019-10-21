@@ -10644,3 +10644,10 @@ a.text-dark:focus {
   }
 }
 
+pre {
+  display: block;
+  font-family: "Nunito", sans-serif;
+  font-size: 100%;
+  white-space: pre-wrap;
+}
+

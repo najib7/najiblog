@@ -14,7 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+
+        $posts = Post::orderBy('id', 'DESC')->paginate(9);
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -35,7 +37,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255|min:4',
+            'body'  => 'required|min:10',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $post = new Post();
+
+        // upload post image
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = 'post-image' . time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/images', $fileName);
+        } else {
+            $fileName = "no-image.png";
+        }
+
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->image = $fileName;
+
+        $post->save();
+
+        return redirect(route('posts.index'))->with('post-created', 'Post was created !');
     }
 
     /**
@@ -46,7 +71,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -57,7 +82,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -69,7 +94,26 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255|min:4',
+            'body'  => 'required|min:10',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        // upload post image
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = 'post-image' . time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/images', $fileName);
+            $post->image = $fileName;
+        }
+
+        $post->title = $request->title;
+        $post->body = $request->body;
+
+        $post->save();
+
+        return redirect(route('posts.show', $post))->with('post-updated', 'Post was updated !');
     }
 
     /**
@@ -80,6 +124,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect(route('posts.index'))->with('post-deleted', 'Post was deleted !');
     }
 }
