@@ -18,14 +18,27 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers {
+        redirectPath as originalRedirectPath;
+    }
+
+
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
+
+    public function redirectPath()
+    {
+        // message after login
+        session()->flash('success-login', 'Hello ' . auth()->user()->name . ' !');
+
+        return $this->originalRedirectPath();
+    }
+
 
     /**
      * Create a new controller instance.

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -57,6 +58,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
         $post->image = $fileName;
+        $post->user_id = Auth::user()->id;
 
         $post->save();
 

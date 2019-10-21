@@ -32,14 +32,14 @@
                         <p class="card-text">{{ Str::limit($post->body, 70) }}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Author | {{ \Carbon\Carbon::parse($post->created_at)->format('d-m-Y') }}</small>
+                        <small class="text-muted">{{ $post->user->name }} | {{ \Carbon\Carbon::parse($post->created_at)->format('d-m-Y') }}</small>
                         <div class="float-right">
-                            <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary btn-sm">edit</a>
-                            <a href="{{ route('posts.show', $post) }}" class="btn btn-success btn-sm">show</a>
+                            <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                            <a href="{{ route('posts.show', $post) }}" class="btn btn-success btn-sm"><i class="fas fa-external-link-square-alt"></i></a>
                             <form action="{{ route('posts.destroy', $post) }}" class="d-inline-block" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                             </form>
                         </div>
                     </div>
