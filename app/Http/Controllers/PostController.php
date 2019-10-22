@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -54,11 +55,13 @@ class PostController extends Controller
         } else {
             $fileName = "no-image.png";
         }
+        $title = $request->title;
 
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->image = $fileName;
+        $post->title   = $title;
+        $post->body    = $request->body;
+        $post->image   = $fileName;
         $post->user_id = Auth::user()->id;
+        $post->slug    = Str::slug($title);
 
         $post->save();
 
@@ -111,7 +114,7 @@ class PostController extends Controller
         }
 
         $post->title = $request->title;
-        $post->body = $request->body;
+        $post->body  = $request->body;
 
         $post->save();
 
@@ -129,4 +132,7 @@ class PostController extends Controller
         $post->delete();
         return redirect(route('posts.index'))->with('post-deleted', 'Post was deleted !');
     }
+
+
+
 }
