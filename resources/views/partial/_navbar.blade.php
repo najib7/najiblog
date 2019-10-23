@@ -11,10 +11,10 @@
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Computer</a>
+                    <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
+                    <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
                 </li>
             </ul>
             <!--

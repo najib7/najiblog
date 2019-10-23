@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategorieController extends Controller
 {
@@ -14,7 +15,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::orderBy('id', 'DESC')->get();
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -24,7 +26,7 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -35,7 +37,20 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'        => 'required|min:3|max:30',
+            'description' => 'required|min:10|max:255',
+        ]);
+
+        $cat = new Categorie();
+
+        $cat->name        = $request->name;
+        $cat->description = $request->description;
+        $cat->slug        = Str::slug($request->name);
+
+        $cat->save();
+
+        return redirect(route('categories.index'))->with('category-created', 'Category created successfully !');
     }
 
     /**
@@ -44,9 +59,10 @@ class CategorieController extends Controller
      * @param  \App\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function show(Categorie $categorie)
+    public function show(Categorie $category)
     {
-        //
+        $posts = $category->posts()->orderBy('id', 'DESC')->paginate(9);
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -55,9 +71,9 @@ class CategorieController extends Controller
      * @param  \App\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit(Categorie $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -67,9 +83,20 @@ class CategorieController extends Controller
      * @param  \App\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, Categorie $category)
     {
-        //
+        $request->validate([
+            'name'        => 'required|min:3|max:30',
+            'description' => 'required|min:10|max:255',
+        ]);
+
+        $category->name        = $request->name;
+        $category->description = $request->description;
+        $category->slug        = Str::slug($request->name);
+
+        $category->save();
+
+        return redirect(route('categories.index'))->with('category-updated', 'Category updated successfully');
     }
 
     /**
@@ -78,8 +105,15 @@ class CategorieController extends Controller
      * @param  \App\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categorie)
+    public function destroy(Categorie $category)
     {
-        //
+
+        if($category->posts->isEmpty())
+        {
+            $category->delete();
+            return redirect(route('categories.index'))->with('category-deleted', 'Category deleted successfully');
+        }
+
+        return 'error hadchi 3amar';
     }
 }

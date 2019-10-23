@@ -30,6 +30,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h5>
                         <p class="card-text">{{ Str::limit($post->body, 70) }}</p>
+                        <p class="card-text">{{ $post->category->name }}</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">{{ $post->user->name }} | {{ \Carbon\Carbon::parse($post->created_at)->format('d-m-Y') }}</small>

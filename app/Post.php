@@ -17,4 +17,10 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    // categories relationship
+    public function category()
+    {
+        return $this->belongsTo('App\Categorie', 'cat_id');
+    }
 }

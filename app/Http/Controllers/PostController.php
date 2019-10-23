@@ -16,7 +16,6 @@ class PostController extends Controller
      */
     public function index()
     {
-
         $posts = Post::orderBy('id', 'DESC')->paginate(9);
         return view('posts.index', compact('posts'));
     }
@@ -62,6 +61,7 @@ class PostController extends Controller
         $post->image   = $fileName;
         $post->user_id = Auth::user()->id;
         $post->slug    = Str::slug($title);
+        $post->cat_id  = $request->cat_id;
 
         $post->save();
 
@@ -113,8 +113,9 @@ class PostController extends Controller
             $post->image = $fileName;
         }
 
-        $post->title = $request->title;
-        $post->body  = $request->body;
+        $post->title  = $request->title;
+        $post->body   = $request->body;
+        $post->cat_id = $request->cat_id;
 
         $post->save();
 

@@ -17,6 +17,14 @@
                     <textarea class="form-control @error('body') is-invalid @enderror" id="body" rows="3" placeholder="Content" name="body">{{ old('body') }}</textarea>
                     @error('body') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
+                <div class="form-group">
+                    <select class="form-control" name="cat_id">
+                        <option>Select category</option>
+                        @foreach(App\Categorie::get() as $cat)
+                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="image" name="image">
                     <label class="custom-file-label form-control @error('image') is-invalid @enderror" for="image">Choose Image</label>
