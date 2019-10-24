@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         @foreach ($posts as $post)
-        <div class="col-md-3 my-3">
+        <div class="col-md-4 my-3">
             <div class="card h-100">
                 <img src="{{ asset('storage/images/'. $post->image)  }}" class="card-img-top" alt="...">
                 <div class="card-body">

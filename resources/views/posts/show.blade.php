@@ -4,13 +4,13 @@
 @section('content')
 
 
-<div class="show-post mb-5">
+<div class="post mb-5">
     <div class="container">
-        @if(session('post-updated'))
+        @if(session('success'))
 
-        <div class="alert alert-info" role="alert">
+        <div class="alert alert-success" role="alert">
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
-            {{ session('post-updated') }}
+            {{ session('success') }}
         </div>
 
         @endif
@@ -28,5 +28,7 @@
         </div>
     </div>
 </div>
+
+@include('comments.create')
 
 @endsection

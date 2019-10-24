@@ -65,7 +65,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect(route('posts.index'))->with('post-created', 'Post was created !');
+        return redirect(route('posts.index'))->with('success', 'Post was created !');
     }
 
     /**
@@ -76,7 +76,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
+        // dd($post->comments->first()->comment);
+        $comments = $post->comments;
+        return view('posts.show', compact('post', 'comments'));
     }
 
     /**
@@ -119,7 +121,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect(route('posts.show', $post))->with('post-updated', 'Post was updated !');
+        return redirect(route('posts.show', $post))->with('success', 'Post was updated !');
     }
 
     /**
@@ -131,7 +133,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect(route('posts.index'))->with('post-deleted', 'Post was deleted !');
+        return redirect(route('posts.index'))->with('success', 'Post was deleted !');
     }
 
 

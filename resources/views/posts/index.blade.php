@@ -4,20 +4,11 @@
 
 <div class="posts">
     <div class="container">
-        @if(session('post-deleted')) <!-- if post deleted successfully -->
-
-        <div class="alert alert-danger" role="alert">
-            <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
-            {{ session('post-deleted') }}
-        </div>
-
-        @endif
-
-        @if(session('post-created')) <!-- if post created successfully -->
+        @if(session('success'))
 
         <div class="alert alert-success" role="alert">
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
-            {{ session('post-created') }}
+            {{ session('success') }}
         </div>
 
         @endif
@@ -26,14 +17,14 @@
             @foreach ($posts as $post)
             <div class="col-md-4 my-3">
                 <div class="card h-100">
-                    <img src="{{ asset('storage/images/'. $post->image)  }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('storage/images/'. $post->image)  }}" class="card-img-top h-50" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h5>
-                        <p class="card-text">{{ Str::limit($post->body, 70) }}</p>
-                        <p class="card-text">{{ $post->category->name }}</p>
+                        <p class="card-text">{{ Str::limit($post->body, 50) }}</p>
+                        <p class="card-text">{{ $post->category->name  }} - {{ \Carbon\Carbon::parse($post->created_at)->format('d-m-Y') }}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">{{ $post->user->name }} | {{ \Carbon\Carbon::parse($post->created_at)->format('d-m-Y') }}</small>
+                        <small class="text-muted">{{ $post->user->name }} </small>
                         <div class="float-right">
                             <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
                             <a href="{{ route('posts.show', $post) }}" class="btn btn-success btn-sm"><i class="fas fa-external-link-square-alt"></i></a>

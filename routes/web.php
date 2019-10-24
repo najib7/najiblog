@@ -24,4 +24,6 @@ Route::resource('posts', 'PostController');
 
 Route::resource('categories', 'CategorieController');
 
+Route::resource('comments', 'CommentController');
+
 Route::get('/my-posts', 'MyPostsController@index')->name('my-posts');

@@ -5,31 +5,11 @@
 <div class="categories">
     <div class="container">
         <!-- if category created successfully -->
-        @if(session('category-created'))
+        @if(session('success'))
 
         <div class="alert alert-success" role="alert">
             <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
-            {{ session('category-created') }}
-        </div>
-
-        @endif
-
-        <!-- if category updated successfully -->
-        @if(session('category-updated'))
-
-        <div class="alert alert-success" role="alert">
-            <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
-            {{ session('category-updated') }}
-        </div>
-
-        @endif
-
-        <!-- if category deleted successfully -->
-        @if(session('category-deleted'))
-
-        <div class="alert alert-success" role="alert">
-            <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
-            {{ session('category-deleted') }}
+            {{ session('success') }}
         </div>
 
         @endif

@@ -50,7 +50,7 @@ class CategorieController extends Controller
 
         $cat->save();
 
-        return redirect(route('categories.index'))->with('category-created', 'Category created successfully !');
+        return redirect(route('categories.index'))->with('success', 'Category created successfully !');
     }
 
     /**
@@ -96,7 +96,7 @@ class CategorieController extends Controller
 
         $category->save();
 
-        return redirect(route('categories.index'))->with('category-updated', 'Category updated successfully');
+        return redirect(route('categories.index'))->with('success', 'Category updated successfully');
     }
 
     /**
@@ -111,7 +111,7 @@ class CategorieController extends Controller
         if($category->posts->isEmpty())
         {
             $category->delete();
-            return redirect(route('categories.index'))->with('category-deleted', 'Category deleted successfully');
+            return redirect(route('categories.index'))->with('success', 'Category deleted successfully');
         }
 
         return 'error hadchi 3amar';
