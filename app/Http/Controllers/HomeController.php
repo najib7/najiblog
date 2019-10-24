@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,31 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // $permission_ids = [];
+        // foreach(Route::getRoutes()->getRoutes() as $key => $route)
+        // {
+        //     $action = explode('@', $route->getActionname());
+        //     $controller = $action[0];
+        //     $method = end($action);
+
+        //     $permission_check = Permission::where([
+        //         'controller' => $controller,
+        //         'method'     => $method
+        //     ])->first();
+
+        //     if(!$permission_check)
+        //     {
+        //         $permission = new Permission;
+
+        //         $permission->controller = $controller;
+        //         $permission->method     = $method;
+        //         $permission->save();
+
+        //     }
+
+        // }
+
+
         return view('home');
     }
 }

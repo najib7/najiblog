@@ -17,10 +17,10 @@
             @foreach ($posts as $post)
             <div class="col-md-4 my-3">
                 <div class="card h-100">
-                    <img src="{{ asset('storage/images/'. $post->image)  }}" class="card-img-top h-50" alt="...">
+                    <img src="{{ asset('storage/images/'. $post->image)  }}" class="card-img-top" alt="{{ $post->title }}">
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h5>
-                        <p class="card-text">{{ Str::limit($post->body, 50) }}</p>
+                        <p class="card-text"><small class="text-muted">{{ Str::limit($post->body, 50) }}</small></p>
                         <p class="card-text">{{ $post->category->name  }} - {{ \Carbon\Carbon::parse($post->created_at)->format('d-m-Y') }}</p>
                     </div>
                     <div class="card-footer">

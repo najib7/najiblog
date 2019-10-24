@@ -17,6 +17,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'image'   => $image[rand(0,4)],
         'slug'    => Str::slug($title),
         'user_id' => User::all()->random()->id,
-        'cat_id' => 1 //Categorie::all()->random()->id
+        'cat_id'  => Categorie::all()->random()->id
     ];
 });
