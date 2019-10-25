@@ -28,6 +28,7 @@
                         <div class="float-right">
                             <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
                             <a href="{{ route('posts.show', $post) }}" class="btn btn-success btn-sm"><i class="fas fa-external-link-square-alt"></i></a>
+
                             <form action="{{ route('posts.destroy', $post) }}" class="d-inline-block" method="POST">
                                 @csrf
                                 @method('DELETE')
