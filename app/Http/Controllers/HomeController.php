@@ -27,10 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $role = Role::findOrFail(Auth::user()->role_id);
-        // $permissions = $role->permissions;
-
-        // dd($role)
+        // Auth::user()->assignRole('writer');
         return view('home');
     }
 }

@@ -9,6 +9,12 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware(['role:author', 'permission:edit post'])->only('edit', 'update', 'create', 'store');
+        $this->middleware(['role_or_permission:author|edit post'])->only('edit', 'update', 'create', 'store');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +53,7 @@ class PostController extends Controller
         $post = new Post();
 
         // upload post image
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = 'post-image' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/images', $fileName);
@@ -108,7 +114,7 @@ class PostController extends Controller
         ]);
 
         // upload post image
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = 'post-image' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/images', $fileName);
@@ -135,7 +141,4 @@ class PostController extends Controller
         $post->delete();
         return redirect(route('posts.index'))->with('success', 'Post was deleted !');
     }
-
-
-
 }
