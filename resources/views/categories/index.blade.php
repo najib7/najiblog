@@ -26,6 +26,7 @@
                         {{-- <h5 class="card-title">nbr posts : {{ $categorie->posts->count() }}</h5> --}}
                         <p class="card-text">{{ $categorie->description }}</p>
                     </div>
+                    @role('admin')
                     <div class="card-footer text-center">
                         <a href="{{ route('categories.edit', $categorie) }}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
                         <form action="{{ route('categories.destroy', $categorie) }}" class="d-inline-block" method="POST">
@@ -34,6 +35,7 @@
                             <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                         </form>
                     </div>
+                    @endrole
                 </div>
             </div>
             @endforeach

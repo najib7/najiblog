@@ -34,10 +34,12 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        @role('admin|author')
                         <a class="dropdown-item" href="{{ route('my-posts') }}">
                             My posts
                         </a>
                         <div class="dropdown-divider"></div>
+                        @endrole
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

@@ -8,6 +8,11 @@ use Illuminate\Support\Str;
 
 class CategorieController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'role:admin'])->except('show', 'index');
+    }
+
     /**
      * Display a listing of the resource.
      *

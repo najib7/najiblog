@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware(['role:author', 'permission:edit post'])->only('edit', 'update', 'create', 'store');
-        $this->middleware(['role_or_permission:author|edit post'])->only('edit', 'update', 'create', 'store');
+        $this->middleware(['auth', 'role:admin|author'])->except('show', 'index');
     }
 
     /**

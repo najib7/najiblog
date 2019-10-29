@@ -27,3 +27,20 @@ Route::resource('categories', 'CategorieController');
 Route::resource('comments', 'CommentController');
 
 Route::get('/my-posts', 'MyPostsController@index')->name('my-posts');
+
+// Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+// Route::prefix('dashboard')->name("dashboard.")->group(function () { });
+
+
+Route::group([
+    'prefix'     => 'dashboard',
+    'as'         => 'dashboard.',
+    'middleware' => 'role:admin'
+], function () {
+
+    Route::get('/', 'DashboardController@index')->name('index');
+    // Route::get('users', 'DashboardController@users')->name('users');
+    Route::resource('users', 'UserController')->except('show');
+
+});

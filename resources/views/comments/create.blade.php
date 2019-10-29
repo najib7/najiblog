@@ -34,12 +34,14 @@
                             <div class="card-body">
                                 <p class="card-text">{{ $c->comment }}</p>
                                 <p class="card-text">
+                                    @can('edit-comment', $c)
                                     <form action="{{ route('comments.destroy', $c) }}" class="d-inline-block" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">delete</button>
                                     </form>
                                     <a href="{{ route('comments.edit', $c) }}" class="btn btn-primary btn-sm">edit</a>
+                                    @endcan
                                     <button href="" class="btn btn-secondary btn-sm">report</button>
                                 </p>
                             </div>

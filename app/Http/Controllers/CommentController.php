@@ -7,10 +7,15 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use phpDocumentor\Reflection\Types\Integer;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth'])->only('store');
+        $this->middleware(['can:edit-comment,comment'])->only('edit', 'update', 'destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,6 +44,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        // $this->authorize('update', $request);
         $validator = Validator::make($request->all(),[
             'comment' => 'required|min:8|max:500'
         ]);

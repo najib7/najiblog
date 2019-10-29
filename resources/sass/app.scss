@@ -11,10 +11,17 @@
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~startbootstrap-sb-admin-2/css/sb-admin-2.min.css';
 
 pre {
     display: block;
     font-family: "Nunito", sans-serif;
     font-size: 100%;
     white-space: pre-wrap;
+}
+
+.reset-button {
+    background: none;
+    border: none;
+    padding: 0;
 }

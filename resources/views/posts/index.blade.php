@@ -4,14 +4,7 @@
 
 <div class="posts">
     <div class="container">
-        @if(session('success'))
-
-        <div class="alert alert-success" role="alert">
-            <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
-            {{ session('success') }}
-        </div>
-
-        @endif
+       @include('_alert')
 
         <div class="row">
             @foreach ($posts as $post)
@@ -28,14 +21,13 @@
                         <div class="float-right">
                             @role('admin|author')
                             <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
-                            @endrole
-                            <a href="{{ route('posts.show', $post) }}" class="btn btn-success btn-sm"><i class="fas fa-external-link-square-alt"></i></a>
-
                             <form action="{{ route('posts.destroy', $post) }}" class="d-inline-block" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="far fa-trash-alt"></i></button>
                             </form>
+                            @endrole
+                            <a href="{{ route('posts.show', $post) }}" class="btn btn-success btn-sm"><i class="fas fa-external-link-square-alt"></i></a>
                         </div>
                     </div>
                 </div>
