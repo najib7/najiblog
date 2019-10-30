@@ -24,7 +24,7 @@ Route::resource('posts', 'PostController');
 
 Route::resource('categories', 'CategorieController');
 
-Route::resource('comments', 'CommentController');
+Route::resource('comments', 'CommentController')->except('index', 'show', 'create');
 
 Route::get('/my-posts', 'MyPostsController@index')->name('my-posts');
 
@@ -40,7 +40,14 @@ Route::group([
 ], function () {
 
     Route::get('/', 'DashboardController@index')->name('index');
-    // Route::get('users', 'DashboardController@users')->name('users');
+
     Route::resource('users', 'UserController')->except('show');
 
+    Route::get('posts', 'DashboardController@posts')->name('posts');
+
+    Route::get('categories', 'DashboardController@categories')->name('categories');
+
+    Route::get('comments', 'DashboardController@comments')->name('comments');
+
+    Route::any('{page}', 'DashboardController@error404')->where('page', '(.*)');
 });

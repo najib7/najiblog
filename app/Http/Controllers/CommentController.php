@@ -13,27 +13,8 @@ class CommentController extends Controller
     public function __construct()
     {
         $this->middleware(['auth'])->only('store');
-        $this->middleware(['can:edit-comment,comment'])->only('edit', 'update', 'destroy');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $this->middleware(['can:edit-comment,comment'])->only('edit', 'update');
+        $this->middleware(['can:destroy-comment,comment'])->only('destroy');
     }
 
     /**
@@ -62,17 +43,6 @@ class CommentController extends Controller
 
         $comment->save();
         return redirect(route('posts.show', $post))->with('success', 'comment added successfully !');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        //
     }
 
     /**

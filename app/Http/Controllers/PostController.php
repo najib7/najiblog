@@ -123,9 +123,7 @@ class PostController extends Controller
         $post->title  = $request->title;
         $post->body   = $request->body;
         $post->cat_id = $request->cat_id;
-
         $post->save();
-
         return redirect(route('posts.show', $post))->with('success', 'Post was updated !');
     }
 

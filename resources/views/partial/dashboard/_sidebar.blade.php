@@ -33,13 +33,13 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-clipboard-list"></i><span>Posts</span></a>
+        <a class="nav-link" href="{{ route('dashboard.posts') }}"><i class="fas fa-clipboard-list"></i><span>Posts</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-layer-group"></i><span>Categories</span></a>
+        <a class="nav-link" href="{{ route('dashboard.categories') }}"><i class="fas fa-layer-group"></i><span>Categories</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-comments"></i><span>Comments</span></a>
+        <a class="nav-link" href="{{ route('dashboard.comments') }}"><i class="fas fa-comments"></i><span>Comments</span></a>
     </li>
 
     <!-- Divider -->

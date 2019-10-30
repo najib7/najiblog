@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Categorie;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class CategorieController extends Controller
 {
@@ -112,13 +113,11 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $category)
     {
-
-        if($category->posts->isEmpty())
-        {
+        try {
             $category->delete();
-            return redirect(route('categories.index'))->with('success', 'Category deleted successfully');
+        } catch(QueryException $e) {
+            return 'hadchi 3amar';
         }
-
-        return 'error hadchi 3amar';
+        return redirect(route('categories.index'))->with('success', 'Category deleted successfully');
     }
 }

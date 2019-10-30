@@ -26,8 +26,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // authorize edit and destroy comments for comment owner admin and post owner
+        // authorize edit comments for comment owner and admin
         Gate::define('edit-comment', function ($user, $comment) {
+            return $user->id == $comment->user_id || $user->hasRole('admin');
+        });
+
+        Gate::define('destroy-comment', function ($user, $comment) {
             return $user->id == $comment->user_id || $user->hasRole('admin') || $comment->post->user_id == $user->id;
         });
     }

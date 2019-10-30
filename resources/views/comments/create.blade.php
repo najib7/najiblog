@@ -4,6 +4,7 @@
         <div class="card p-4 mb-5">
             <div class="row">
                 <div class="col-md-8 m-auto">
+                    @auth
                     <form action="{{ route('comments.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
@@ -15,7 +16,13 @@
                         <input type="hidden" name="post_id" value="{{ $post->id }}">
                         <button type="submit" class="btn btn-primary">comment</button>
                     </form>
+                    @endauth
 
+                    @guest
+                    <div class="alert alert-info" role="alert">
+                        You must be logged in to comment
+                    </div>
+                    @endguest
                     {{-- dislay comments --}}
                     <div class="comments">
                         @if($comments->isEmpty())
@@ -34,12 +41,14 @@
                             <div class="card-body">
                                 <p class="card-text">{{ $c->comment }}</p>
                                 <p class="card-text">
-                                    @can('edit-comment', $c)
+                                    @can('destroy-comment', $c)
                                     <form action="{{ route('comments.destroy', $c) }}" class="d-inline-block" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">delete</button>
                                     </form>
+                                    @endcan
+                                    @can('edit-comment', $c)
                                     <a href="{{ route('comments.edit', $c) }}" class="btn btn-primary btn-sm">edit</a>
                                     @endcan
                                     <button href="" class="btn btn-secondary btn-sm">report</button>
