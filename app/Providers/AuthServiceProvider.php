@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Role;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -33,6 +32,16 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('destroy-comment', function ($user, $comment) {
             return $user->id == $comment->user_id || $user->hasRole('admin') || $comment->post->user_id == $user->id;
+        });
+
+        //edit profile
+        Gate::define('edit-profile', function ($user, $profileUser) {
+            return $user->id == $profileUser->id || $user->hasRole('admin');
+        });
+
+        //change password only for owner user (admin can change users passwords from dashboard)
+        Gate::define('change-password', function ($user, $profileUser) {
+            return $user->id == $profileUser->id;
         });
     }
 }

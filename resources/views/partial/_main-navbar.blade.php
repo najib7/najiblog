@@ -43,8 +43,13 @@
                         <a class="dropdown-item" href="{{ route('my-posts') }}">
                             My posts
                         </a>
-                        <div class="dropdown-divider"></div>
                         @endrole
+                        @auth
+                        <a class="dropdown-item" href="{{ route('profile.show', auth()->user()) }}">
+                            Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        @endauth
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

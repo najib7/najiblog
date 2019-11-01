@@ -7,13 +7,13 @@
 
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item {{ Route::is('home') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('/') . '/' }}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::is('posts.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::is('categories.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('categories.index') }}">Categories</a>
                 </li>
             </ul>

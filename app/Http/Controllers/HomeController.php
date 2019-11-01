@@ -2,24 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\Permission;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use App\Post;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -27,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Auth::user()->assignRole('writer');
-        return view('home');
+        $posts = Post::orderBy('id', 'desc')->paginate(6);
+        return view('home', compact('posts'));
     }
 }

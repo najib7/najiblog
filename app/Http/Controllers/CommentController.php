@@ -29,6 +29,7 @@ class CommentController extends Controller
         $validator = Validator::make($request->all(),[
             'comment' => 'required|min:8|max:500'
         ]);
+
         // scroll down to the comment sections
         if ($validator->fails()) {
             return redirect(url()->previous() . "#comment-error")->withErrors($validator->errors());

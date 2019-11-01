@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class PostController extends Controller
 {
@@ -94,6 +95,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        session(['url-prev' => url()->previous()]);
         return view('posts.edit', compact('post'));
     }
 
@@ -111,7 +113,6 @@ class PostController extends Controller
             'body'  => 'required|min:10',
             'image' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
-
         // upload post image
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -124,7 +125,9 @@ class PostController extends Controller
         $post->body   = $request->body;
         $post->cat_id = $request->cat_id;
         $post->save();
-        return redirect(route('posts.show', $post))->with('success', 'Post was updated !');
+
+        // return redirect(route('posts.show', $post));
+        return redirect(session('url-prev'))->with('success', 'Post was updated !');
     }
 
     /**
@@ -137,5 +140,12 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect(route('posts.index'))->with('success', 'Post was deleted !');
+    }
+
+    //my posts route
+    public function myPosts()
+    {
+        $posts = Auth::user()->posts;
+        return view('posts.my-posts', compact('posts'));
     }
 }

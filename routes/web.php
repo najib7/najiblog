@@ -12,27 +12,37 @@
 */
 
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::resource('posts', 'PostController');
+Route::get('/my-posts', 'PostController@myPosts')->name('my-posts');
 
 Route::resource('categories', 'CategorieController');
 
 Route::resource('comments', 'CommentController')->except('index', 'show', 'create');
 
-Route::get('/my-posts', 'MyPostsController@index')->name('my-posts');
+Route::resource('/profile', 'ProfileController')
+    ->except('index', 'create', 'store')
+    ->parameters([
+        'profile' => 'user'
+    ]);
+Route::get('/profile/changePassword/{user}', [
+    'as' => 'profile.editpassword',
+    'uses'  => 'ProfileController@editPassword',
+    'middleware' => 'password.confirm'
+]);
+Route::put('/profile/changePassword/{user}', [
+    'as' => 'profile.updatepassword',
+    'uses'  => 'ProfileController@updatePassword',
+]);
 
-// Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-
-// Route::prefix('dashboard')->name("dashboard.")->group(function () { });
-
-
+//only for admin
 Route::group([
     'prefix'     => 'dashboard',
     'as'         => 'dashboard.',
