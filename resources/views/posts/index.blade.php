@@ -10,11 +10,11 @@
             @foreach ($posts as $post)
             <div class="col-md-4 my-3">
                 <div class="card h-100">
-                    <img src="{{ asset('storage/images/'. $post->image)  }}" class="card-img-top" alt="{{ $post->title }}">
+                    <img src="{{ url('storage/images/'. $post->image)  }}" class="card-img-top" alt="{{ $post->title }}">
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h5>
                         <p class="card-text"><small class="text-muted">{{ Str::limit($post->body, 50) }}</small></p>
-                        <p class="card-text">{{ $post->category->name  }} - {{ \Carbon\Carbon::parse($post->created_at)->format('d-m-Y') }}</p>
+                        <p class="card-text">{{ $post->category->name  }} - {{ $post->created_at->format('d-m-Y') }}</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">{{ $post->user->name }} </small>

@@ -49352,6 +49352,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./sb-admin-2.min.js */ "./resources/js/sb-admin-2.min.js");
 
+__webpack_require__(/*! ./script */ "./resources/js/script.js");
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -49524,6 +49526,19 @@ __webpack_require__.r(__webpack_exports__);
     }, 1e3, "easeInOutExpo"), o.preventDefault();
   });
 }(jQuery);
+
+/***/ }),
+
+/***/ "./resources/js/script.js":
+/*!********************************!*\
+  !*** ./resources/js/script.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(function () {
+  console.log("ready!");
+});
 
 /***/ }),
 

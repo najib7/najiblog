@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(6);
+        $posts = Post::orderBy('id', 'desc')->take(9)->get();
         return view('home', compact('posts'));
     }
 }

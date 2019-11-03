@@ -145,7 +145,7 @@ class PostController extends Controller
     //my posts route
     public function myPosts()
     {
-        $posts = Auth::user()->posts;
+        $posts = Auth::user()->posts->sortByDesc('id');
         return view('posts.my-posts', compact('posts'));
     }
 }

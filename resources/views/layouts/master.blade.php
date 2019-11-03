@@ -23,6 +23,12 @@
         @include('partial._header')
         @include('partial._navbar')
         @yield('content')
+
+        <footer class="footer text-center">
+            <div class="container">
+                <span class="text-light">Make with <i class="fas fa-heart red"></i> {{ date('Y') }}</span>
+            </div>
+        </footer>
     </div>
 
 
