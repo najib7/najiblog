@@ -116,7 +116,7 @@ class CategorieController extends Controller
         try {
             $category->delete();
         } catch(QueryException $e) {
-            return 'hadchi 3amar';
+            return redirect(route('categories.index'))->with('delete-err-cat', 'Delete posts first !');
         }
         return redirect(route('categories.index'))->with('success', 'Category deleted successfully');
     }

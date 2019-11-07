@@ -9,6 +9,8 @@
     <title>{{ config('app.name') }}</title>
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
 <body id="page-top">
@@ -54,7 +56,6 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

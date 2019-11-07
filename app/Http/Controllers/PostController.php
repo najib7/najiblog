@@ -45,7 +45,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:255|min:4',
+            'title' => 'required|min:4|max:60|unique:posts,title',
             'body'  => 'required|min:10',
             'image' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
@@ -82,7 +82,6 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        // dd($post->comments->first()->comment);
         $comments = $post->comments;
         return view('posts.show', compact('post', 'comments'));
     }
@@ -109,7 +108,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'title' => 'required|max:255|min:4',
+            'title' => 'required|max:255|min:4|unique:posts,title,' . $post->id,
             'body'  => 'required|min:10',
             'image' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
@@ -146,7 +145,6 @@ class PostController extends Controller
     public function myPosts()
     {
         $posts = Auth::user()->posts()->orderBy('id', 'desc')->paginate(10);
-        // $posts = Post::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
         return view('posts.index', compact('posts'));
     }
 }

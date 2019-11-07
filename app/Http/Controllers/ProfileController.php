@@ -22,8 +22,8 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        $posts = $user->posts->sortByDesc('id')->take(5);
-        $comments = $user->comments->sortByDesc('id')->take(5);
+        $posts    = $user->posts()->orderBy('id', 'desc')->take(5)->get();
+        $comments = $user->comments()->orderBy('id', 'desc')->take(5)->get();
 
         return view('profile.show', compact('user', 'posts', 'comments'));
     }
@@ -49,7 +49,7 @@ class ProfileController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
+            'name'     => ['required', 'string', 'max:60'],
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id]
         ]);
 

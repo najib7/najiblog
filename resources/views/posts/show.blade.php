@@ -36,7 +36,7 @@
                 </article>
 
                 {{-- comments --}}
-                @include('comments.create')
+                @include('comments.display')
             </div>
         </div>
 

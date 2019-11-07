@@ -3,15 +3,7 @@
 @section('content')
 
 <div class="categories">
-    <!-- if category created successfully -->
-    @if(session('success'))
-
-    <div class="alert alert-success" role="alert">
-        <button class="close" data-dismiss="alert" aria-hidden="true">x</button>
-        {{ session('success') }}
-    </div>
-
-    @endif
+    @include('_alert')
 
     <div class="row">
         @foreach($categories as $categorie)
@@ -44,5 +36,3 @@
 </div>
 
 @endsection
-
-{{-- route('posts.show', $post) --}}

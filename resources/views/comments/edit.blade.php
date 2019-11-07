@@ -14,7 +14,6 @@
                         name="comment">{{ old('comment') ?? $comment->comment }}</textarea>
                     @error('comment') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
-                {{-- <input type="hidden" name="post_id" value="{{ $post->id }}"> --}}
                 <button type="submit" class="btn btn-primary">edit</button>
             </form>
         </div>

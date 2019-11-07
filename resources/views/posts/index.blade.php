@@ -1,20 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-    @if (session('success-login'))
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="alert alert-success" role="alert">
-                {{ session('success-login') }}
-            </div>
-        </div>
-    </div>
-    @endif
-
     <div class="row">
         <div class="col-lg-8">
-            {{-- @include('partial._slider') --}}
-            {{-- home page posts --}}
             <div class="posts">
                 <div class="row">
                     @if($posts->isEmpty())

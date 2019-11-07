@@ -25,7 +25,6 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->authorize('update', $request);
         $validator = Validator::make($request->all(),[
             'comment' => 'required|min:8|max:500'
         ]);
@@ -41,8 +40,8 @@ class CommentController extends Controller
         $comment->comment = $request->comment;
         $comment->user_id = Auth::user()->id;
         $comment->post_id = $post->id;
-
         $comment->save();
+
         return redirect(route('posts.show', $post))->with('success', 'comment added successfully !');
     }
 
