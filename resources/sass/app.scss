@@ -15,7 +15,7 @@
 
 pre {
     display: block;
-    font-family: "Nunito", sans-serif;
+    font-family: "Robot", sans-serif;
     font-size: 100%;
     white-space: pre-wrap;
 }
@@ -25,5 +25,39 @@ pre {
     border: none;
     padding: 0;
 }
+
+.btn-delete { color: $red; }
+.btn-delete:hover { color: $thir; }
+.btn-report { color: #b7b7b7; }
+.btn-report:hover { color: $thir; }
+.btn-edit { color: $green; }
+.btn-edit:hover { color: $thir; }
+
+.container {
+    background-color: #FFF;
+    padding: 0;
+    position: relative;
+    min-height: calc(100vh - 60px);
+}
+
+
+footer.sticky-footer {
+    padding: 2rem 0;
+    flex-shrink: 0;
+    left: 0;
+}
+
+
+.home-posts {
+    .card {
+        position: relative;
+        .buttons {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+    }
+}
+
 
 @import 'style';

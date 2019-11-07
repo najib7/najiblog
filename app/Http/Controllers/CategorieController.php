@@ -67,7 +67,7 @@ class CategorieController extends Controller
      */
     public function show(Categorie $category)
     {
-        $posts = $category->posts()->orderBy('id', 'DESC')->paginate(9);
+        $posts = $category->posts()->orderBy('id', 'DESC')->paginate(10);
         return view('posts.index', compact('posts'));
     }
 

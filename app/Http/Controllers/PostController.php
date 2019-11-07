@@ -22,7 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'DESC')->paginate(9);
+        $posts = Post::orderBy('id', 'DESC')->paginate(10);
         return view('posts.index', compact('posts'));
     }
 
@@ -145,7 +145,8 @@ class PostController extends Controller
     //my posts route
     public function myPosts()
     {
-        $posts = Auth::user()->posts->sortByDesc('id');
-        return view('posts.my-posts', compact('posts'));
+        $posts = Auth::user()->posts()->orderBy('id', 'desc')->paginate(10);
+        // $posts = Post::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
+        return view('posts.index', compact('posts'));
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,24 +14,26 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div id="app">
-        <!-- header -->
+    <!-- header -->
+    <div class="container">
         @include('partial._main-navbar')
         @include('partial._header')
         @include('partial._navbar')
-        @yield('content')
+
+        <div class="content-wrapper">
+            @yield('content')
+        </div>
 
         <footer class="footer text-center">
-            <div class="container">
-                <span class="text-light">Make with <i class="fas fa-heart red"></i> {{ date('Y') }}</span>
-            </div>
+            <span class="text-light">Najib <span class="green">{{ date('Y') }}</span></span>
         </footer>
     </div>
 
 
 </body>
+
 </html>
