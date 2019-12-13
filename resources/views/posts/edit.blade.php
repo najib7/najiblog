@@ -24,7 +24,6 @@
 
             <div class="form-group">
                 <select class="form-control" name="cat_id">
-                    <option>Select category</option>
                     @foreach(App\Categorie::get() as $cat)
                     <option value="{{ $cat->id }}" @if($cat->id == $post->cat_id) selected @endif>{{ $cat->name }}
                     </option>

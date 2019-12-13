@@ -19,12 +19,13 @@
                 @error('body') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
             <div class="form-group">
-                <select class="form-control" name="cat_id">
-                    <option>Select category</option>
+                <select class="form-control @error('cat_id') is-invalid @enderror" name="cat_id">
+                    <option disabled selected>Select category</option>
                     @foreach(App\Categorie::get() as $cat)
                     <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                     @endforeach
                 </select>
+                @error('cat_id') <div class="invalid-feedback">the category is required</div> @enderror
             </div>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="image" name="image">

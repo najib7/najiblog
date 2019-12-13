@@ -47,6 +47,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|min:4|max:60|unique:posts,title',
             'body'  => 'required|min:10',
+            'cat_id' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
@@ -110,6 +111,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255|min:4|unique:posts,title,' . $post->id,
             'body'  => 'required|min:10',
+            'cat_id' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
         // upload post image
