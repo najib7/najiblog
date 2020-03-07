@@ -32,7 +32,7 @@ class DashboardController extends Controller
     //all comments
     public function comments()
     {
-        $comments = Comment::orderBy('id', 'DESC')->paginate(6);
+        $comments = Comment::orderBy('id', 'DESC')->get();
         return view('dashboard.comments.comments', compact('comments'));
     }
 
