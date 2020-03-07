@@ -1,61 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
+ 
 <head>
-
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ config('app.name') }}</title>
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <title>{{ config('app.name') }} - dahsboard</title>
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- css files -->
+    <link href="{{ mix('css/vendor.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/dashboard.css') }}" rel="stylesheet">
+
+    <!-- js files -->
+    <script src="{{ mix('js/manifest.js') }}" defer></script>
+    <script src="{{ mix('js/vendor.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
-{{-- new test --}}
-<body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<body>
+    <div class="dashboard-main-wrapper">
 
-        <!-- Sidebar -->
-        @include('partial.dashboard._sidebar')
+        @include('partial.dashboard.header')
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        @include('partial.dashboard.sidbar')
 
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                @include('partial.dashboard._topbar')
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
-
-                @yield('content')
-
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2019</span>
+        <div class="dashboard-wrapper">
+            <div class="container-fluid dashboard-content">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title">@yield('title')</h2>
+                        </div>
                     </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
 
+                <div class="dashboard-body">
+                    @yield('dashboard-body')
+                </div>
+            </div>
         </div>
-        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Page Wrapper -->
 
+    <div class="footer">
+        <div class="row">
+            <div class="text-md-right footer-links ml-auto">
+                Copyright ©2020 Najiblog.
+            </div>
+        </div>
+    </div>
 </body>
-
+ 
 </html>

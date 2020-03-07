@@ -1,10 +1,11 @@
 @extends('layouts.dashboard.master')
 
-@section('content')
+@section('title', 'Create new user')
+
+@section('dashboard-body')
 
 <div class="row">
     <div class="col-md-8 m-auto">
-        <h3>Create new user</h3>
         <div class="card p-4">
             <form action="{{ route('dashboard.users.store') }}" method="POST">
                 @csrf

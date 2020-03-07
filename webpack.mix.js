@@ -11,5 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix.version()
+
+mix.js('resources/js/app.js', 'public/js').extract(['popper.js', 'jquery', 'bootstrap'])
+
+mix.sass('resources/sass/app.scss', 'public/css/vendor.css')
+mix.sass('resources/sass/style.scss', 'public/css/style.css')
+mix.sass('resources/sass/dashboard.scss', 'public/css/dashboard.css')

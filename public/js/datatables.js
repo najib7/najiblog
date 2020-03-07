@@ -1,85 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["/js/app"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["/js/datatables"],{
 
-/***/ "./node_modules/webpack/buildin/global.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-try {
-  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
-  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
-  __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-} catch (e) {}
-
-__webpack_require__(/*! ./datatables */ "./resources/js/datatables.js");
-
-$(document).ready(function () {
-  $('#dataTable').DataTable();
-});
-
-__webpack_require__(/*! ./script */ "./resources/js/script.js");
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-/***/ }),
-
-/***/ "./resources/js/datatables.js":
-/*!************************************!*\
-  !*** ./resources/js/datatables.js ***!
-  \************************************/
+/***/ "./resources/js/datatable/datatables.js":
+/*!**********************************************!*\
+  !*** ./resources/js/datatable/datatables.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14205,96 +14129,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
 
 /***/ }),
 
-/***/ "./resources/js/script.js":
-/*!********************************!*\
-  !*** ./resources/js/script.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(function () {
-  // manag post buttons
-  $('.post-outer').hover(function () {
-    $(this).children('.manag-post').show();
-  }, function () {
-    $(this).children('.manag-post').hide();
-  }); // btn comments
-
-  $('.comment-post .comment').hover(function () {
-    $(this).children('.btn-comment').show();
-  }, function () {
-    $(this).children('.btn-comment').hide();
-  }); // delete records in datatable
-
-  $('#dataTable').on('click', '.btn-delete', function (e) {
-    e.preventDefault();
-
-    if (confirm('Are you sure ?!')) {
-      e.target.parentElement.nextElementSibling.submit();
-    }
-  }); // limit lenght of string
-
-  function limitString(str, lenght) {
-    if (str.length > lenght) {
-      return str.substring(0, lenght) + '...';
-    } else {
-      return str;
-    }
-  }
-
-  $('.show-comment').each(function (index, element) {
-    element.innerHTML = limitString(element.innerHTML, 60);
-  });
-});
-
-/***/ }),
-
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/dashboard.scss":
-/*!***************************************!*\
-  !*** ./resources/sass/dashboard.scss ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/style.scss":
-/*!***********************************!*\
-  !*** ./resources/sass/style.scss ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!*************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/style.scss ./resources/sass/dashboard.scss ***!
-  \*************************************************************************************************************************/
+/***/ 1:
+/*!****************************************************!*\
+  !*** multi ./resources/js/datatable/datatables.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\sass\style.scss */"./resources/sass/style.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\js\datatable\datatables.js */"./resources/js/datatable/datatables.js");
 
 
 /***/ })
 
-},[[0,"/js/manifest","/js/vendor"]]]);
+},[[1,"/js/manifest","/js/vendor"]]]);

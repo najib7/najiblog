@@ -1,11 +1,12 @@
 @extends('layouts.dashboard.master')
 
-@section('content')
+@section('dashboard-body')
+
+@include('_alert')
 
 <div class="row">
     <div class="col-md-8 m-auto">
         <h3>Edit user : {{ $user->name }}</h3>
-        @include('_alert')
         <div class="card p-4">
             <form action="{{ route('dashboard.users.update', $user) }}" method="POST">
                 @csrf

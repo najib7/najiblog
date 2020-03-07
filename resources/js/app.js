@@ -4,9 +4,20 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-require('./sb-admin-2.min.js');
-require('./script');
+try {
+    window.Popper = require('popper.js').default;
+    window.$ = window.jQuery = require('jquery');
+    require('bootstrap')
+} catch (e) {}
+
+
+require('./datatables')
+
+$(document).ready( function () {
+    $('#dataTable').DataTable();
+});
+
+require('./script')
 
 /**
  * The following block of code may be used to automatically register your

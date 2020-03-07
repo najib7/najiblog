@@ -49,8 +49,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure?')"><i
-                                            class="far fa-trash-alt"></i></button>
+                                        onclick="return confirm('Are you sure?')"><i class="far fa-trash-alt"></i></button>
                                 </form>
                             </div>
                             @endrole
