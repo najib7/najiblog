@@ -16,5 +16,6 @@ mix.version()
 mix.js('resources/js/app.js', 'public/js').extract(['popper.js', 'jquery', 'bootstrap'])
 
 mix.sass('resources/sass/app.scss', 'public/css/vendor.css')
-mix.sass('resources/sass/style.scss', 'public/css/style.css')
+mix.sass('resources/sass/blog.scss', 'public/css/blog.css')
+// mix.sass('resources/sass/style.scss', 'public/css/style.css')
 mix.sass('resources/sass/dashboard.scss', 'public/css/dashboard.css')
