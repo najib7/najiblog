@@ -44,11 +44,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+        // just for test text editor
+
+        // dd($request);
+
+
+
+        // die;
         $request->validate([
-            'title' => 'required|min:4|max:60|unique:posts,title',
-            'body'  => 'required|min:10',
-            'cat_id' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'title'  => 'required|min:4|max:60|unique:posts,title',
+            'body'   => 'required|min:10',
+            'cat_id' => 'required|integer|exists:categories,id',
+            'image'  => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         $post = new Post();
@@ -59,7 +67,7 @@ class PostController extends Controller
             $fileName = 'post-image' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/images', $fileName);
         } else {
-            $fileName = "no-image.png";
+            $fileName = "no-image.svg";
         }
         $title = $request->title;
 
@@ -109,10 +117,10 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'title' => 'required|max:255|min:4|unique:posts,title,' . $post->id,
-            'body'  => 'required|min:10',
-            'cat_id' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'title'  => 'required|max:255|min:4|unique:posts,title,' . $post->id,
+            'body'   => 'required|min:10',
+            'cat_id' => 'required|integer|exists:categories,id',
+            'image'  => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
         // upload post image
         if ($request->hasFile('image')) {
