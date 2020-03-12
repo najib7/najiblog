@@ -14213,26 +14213,35 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
 /***/ (function(module, exports) {
 
 $(function () {
-  // manag post buttons
-  $('.post-outer').hover(function () {
-    $(this).children('.manag-post').show();
+  /**old */
+  // actions posts
+  $('.posts').hover(function () {
+    $(this).children('.posts-actions').fadeIn();
   }, function () {
-    $(this).children('.manag-post').hide();
-  }); // btn comments
+    $(this).children('.posts-actions').fadeOut();
+  });
+  /**
+   * Global
+   */
+  // delete button
 
-  $('.comment-post .comment').hover(function () {
-    $(this).children('.btn-comment').show();
-  }, function () {
-    $(this).children('.btn-comment').hide();
-  }); // delete records in datatable
-
-  $('#dataTable').on('click', '.btn-delete', function (e) {
+  $(document).on('click', '.btn-delete', function (e) {
     e.preventDefault();
 
     if (confirm('Are you sure ?!')) {
-      e.target.parentElement.nextElementSibling.submit();
+      var form = $(this).next();
+
+      if (form.is('form')) {
+        form.submit();
+      } else {
+        throw new Error('Failed to delete the item');
+      }
     }
-  }); // limit lenght of string
+  });
+  /**
+   * dashboard
+   */
+  // limit lenght of string 
 
   function limitString(str, lenght) {
     if (str.length > lenght) {
@@ -14240,10 +14249,32 @@ $(function () {
     } else {
       return str;
     }
-  }
+  } // limit comment lenght in dashboard comment table
+
 
   $('.show-comment').each(function (index, element) {
     element.innerHTML = limitString(element.innerHTML, 60);
+  });
+  /**
+   * blog
+   */
+  //logout button
+
+  $('#logout-button').click(function (e) {
+    e.preventDefault();
+    $('#logout-form').submit();
+  }); //image preview
+
+  $('#image').change(function (e) {
+    if (FileReader) {
+      var fr = new FileReader();
+
+      fr.onload = function () {
+        $('#out-image').attr('src', fr.result);
+      };
+
+      fr.readAsDataURL(e.target.files[0]);
+    }
   });
 });
 
@@ -14253,6 +14284,17 @@ $(function () {
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
   \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/blog.scss":
+/*!**********************************!*\
+  !*** ./resources/sass/blog.scss ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -14271,27 +14313,16 @@ $(function () {
 
 /***/ }),
 
-/***/ "./resources/sass/style.scss":
-/*!***********************************!*\
-  !*** ./resources/sass/style.scss ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 0:
-/*!*************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/style.scss ./resources/sass/dashboard.scss ***!
-  \*************************************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/blog.scss ./resources/sass/dashboard.scss ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\sass\blog.scss */"./resources/sass/blog.scss");
 module.exports = __webpack_require__(/*! C:\xampp\htdocs\najiblog\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
 
 
