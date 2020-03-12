@@ -23,7 +23,7 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Post $post)
     {
         $validator = Validator::make($request->all(),[
             'comment' => 'required|min:8|max:500'
@@ -31,11 +31,9 @@ class CommentController extends Controller
 
         // scroll down to the comment sections
         if ($validator->fails()) {
-            return redirect(url()->previous() . "#comment-error")->withErrors($validator->errors());
+            return redirect(url()->previous() . "#comments")->withErrors($validator->errors());
         }
-
-        $post = Post::findOrFail($request->post_id);
-
+        
         $comment = new Comment();
         $comment->comment = $request->comment;
         $comment->user_id = Auth::user()->id;
@@ -83,6 +81,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        dd('comment deleted');
         $comment->delete();
         return redirect(url()->previous())->with('success', 'comment deleted successfully !');
     }

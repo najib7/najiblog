@@ -11,17 +11,24 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+// home page
+Route::get('/', 'PostController@index')->name('home');
 
+// auth routes
 Auth::routes();
 
+// posts
 Route::resource('posts', 'PostController');
 Route::get('/my-posts', 'PostController@myPosts')->name('my-posts');
 
+// categories
 Route::resource('categories', 'CategorieController');
 
-Route::resource('comments', 'CommentController')->except('index', 'show', 'create');
+// comments
+Route::resource('comments', 'CommentController')->except('index', 'show', 'create', 'store');
+Route::post('comments/store/{post}', 'CommentController@store')->name('comments.store');
 
+// profile routes
 Route::resource('/profile', 'ProfileController')
     ->except('index', 'create', 'store')
     ->parameters([
