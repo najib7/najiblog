@@ -40,7 +40,7 @@ class CommentController extends Controller
         $comment->post_id = $post->id;
         $comment->save();
 
-        return redirect(route('posts.show', $post))->with('success', 'comment added successfully !');
+        return redirect(route('posts.show', $post))->with('success', 'Comment added successfully');
     }
 
     /**
@@ -63,14 +63,24 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'comment' => 'required|min:8|max:500'
         ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $validator->errors()
+            ]);
+        }
+
         $comment->comment = $request->comment;
         $comment->save();
-
-        return redirect(route('posts.show', $comment->post))->with('success', 'Comment edited !');
+        
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Comment edited successfully',
+        ]);
     }
 
     /**
@@ -81,8 +91,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        dd('comment deleted');
         $comment->delete();
-        return redirect(url()->previous())->with('success', 'comment deleted successfully !');
+        return redirect(url()->previous())->with('success', 'Comment deleted successfully');
     }
 }
