@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Categorie;
 use App\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'role:admin|author'])->except('show', 'index');
+        $this->middleware(['auth', 'role:admin|author'])->except('show', 'index', 'showCat');
+        $this->middleware(['auth'])->only('indexapi');
     }
 
     /**
@@ -22,9 +24,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'DESC')->paginate(10);
-        return view('posts.index', compact('posts'));
+        $posts = Post::orderBy('id', 'DESC')->paginate(config('blog.post_per_page'));
+        return view('blog.posts.index', compact('posts'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -33,7 +36,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('blog.posts.create');
     }
 
     /**
@@ -44,14 +47,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
-        // just for test text editor
-
-        // dd($request);
-
-
-
-        // die;
         $request->validate([
             'title'  => 'required|min:4|max:60|unique:posts,title',
             'body'   => 'required|min:10',
@@ -91,8 +86,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $comments = $post->comments;
-        return view('posts.show', compact('post', 'comments'));
+        return view('blog.posts.show', compact('post'));
+    }
+
+    public function showCat(Categorie $cat, Post $post)
+    {
+        return view('blog.posts.show', compact('post'));
     }
 
     /**
@@ -104,7 +103,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         session(['url-prev' => url()->previous()]);
-        return view('posts.edit', compact('post'));
+        return view('blog.posts.edit', compact('post'));
     }
 
     /**
@@ -122,6 +121,7 @@ class PostController extends Controller
             'cat_id' => 'required|integer|exists:categories,id',
             'image'  => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
+        
         // upload post image
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -135,8 +135,7 @@ class PostController extends Controller
         $post->cat_id = $request->cat_id;
         $post->save();
 
-        // return redirect(route('posts.show', $post));
-        return redirect(session('url-prev'))->with('success', 'Post was updated !');
+        return redirect(route('posts.edit', $post))->with('success', 'test');
     }
 
     /**
@@ -148,13 +147,13 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect(route('posts.index'))->with('success', 'Post was deleted !');
+        return back()->with('success', 'Post was deleted !');
     }
 
     //my posts route
     public function myPosts()
     {
-        $posts = Auth::user()->posts()->orderBy('id', 'desc')->paginate(10);
-        return view('posts.index', compact('posts'));
+        $posts = Auth::user()->posts()->orderBy('id', 'desc')->paginate(config('blog.post_per_page'));
+        return view('blog.posts.index', compact('posts'));
     }
 }

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Categorie;
 use App\Comment;
 use App\Post;
-use App\User;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {

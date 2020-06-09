@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -56,17 +57,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        return view('dashboard.users.edit', compact('user'));
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -94,7 +84,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect(route('dashboard.users.edit', compact('user')))->with('success', 'Changes saved');
+        return redirect(route('dashboard.users.index'))->with('success', 'Changes saved');
     }
 
     /**
@@ -105,6 +95,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        // delete image
+        $image = profiles_storage_path($user->profile->image);
+        if($user->profile->image && File::exists($image)) {
+            File::delete($image);
+        }
+
         $user->delete();
         return redirect(route('dashboard.users.index'))->with('success', 'User deleted !');
     }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -34,9 +37,16 @@ class LoginController extends Controller
     public function redirectPath()
     {
         // message after login
-        session()->flash('success-login', 'Hello ' . auth()->user()->name . ' !');
+        session()->flash('success-login', 'Welcome ' . Auth::user()->username);
 
         return $this->originalRedirectPath();
+    }
+
+    function authenticated(Request $request, $user)
+    {
+        $user->update([
+            'last_login' => Carbon::now(),
+        ]);
     }
 
 
