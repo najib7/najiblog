@@ -21,8 +21,10 @@ Auth::routes();
 Route::resource('posts', 'PostController');
 Route::get('/my-posts', 'PostController@myPosts')->name('my-posts');
 
+// Route::get('/{cat}/{post}', 'PostController@showCat');
+
 // categories
-Route::resource('categories', 'CategorieController');
+Route::resource('categories', 'CategorieController')->only('show');
 
 // comments
 Route::resource('comments', 'CommentController')->except('index', 'show', 'create', 'store');
@@ -30,7 +32,7 @@ Route::post('comments/store/{post}', 'CommentController@store')->name('comments.
 
 // profile routes
 Route::resource('/profile', 'ProfileController')
-    ->except('index', 'create', 'store')
+    ->except('index', 'create', 'store', 'destroy')
     ->parameters([
         'profile' => 'user'
     ]);
@@ -53,7 +55,7 @@ Route::group([
 
     Route::get('/', 'DashboardController@index')->name('index');
 
-    Route::resource('users', 'UserController')->except('show');
+    Route::resource('users', 'UserController')->except('show', 'edit');
 
     Route::get('posts', 'DashboardController@posts')->name('posts');
 
