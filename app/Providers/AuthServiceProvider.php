@@ -25,9 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // authorize edit comments for comment owner and admin
+        // authorize edit comments for comment owner
         Gate::define('edit-comment', function ($user, $comment) {
-            return $user->id == $comment->user_id || $user->hasRole('admin');
+            return $user->id == $comment->user_id;
         });
 
         Gate::define('destroy-comment', function ($user, $comment) {
@@ -39,7 +39,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id == $profileUser->id || $user->hasRole('admin');
         });
 
-        //change password only for owner user (admin can change users passwords from dashboard)
+        //change password only for owner user
         Gate::define('change-password', function ($user, $profileUser) {
             return $user->id == $profileUser->id;
         });
