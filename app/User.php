@@ -11,28 +11,25 @@ class User extends Authenticatable
 {
     use Notifiable, HasRoles;
 
-    public function getRouteKeyName()
-    {
-        return 'name';
-    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id',
+        'username', 'email', 'password', 'role_id', 'last_login',
     ];
-
+    
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
-
+    
     /**
      * The attributes that should be cast to native types.
      *
@@ -42,6 +39,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $dates = ['last_login'];
+
+
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+    
     // post relationship
     public function posts() {
         return $this->hasMany('App\Post');
@@ -51,5 +56,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Comment');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
     }
 }
