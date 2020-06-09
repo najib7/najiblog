@@ -10,11 +10,15 @@ try {
     require('bootstrap')
 } catch (e) {}
 
+window.Swal = require('sweetalert2')
+
 
 require('./datatables')
 
 $(document).ready( function () {
-    $('#dataTable').DataTable();
+    $('#dataTable').DataTable({
+        "order": []
+    });
 });
 
 require('./script')
