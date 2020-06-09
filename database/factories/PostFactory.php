@@ -7,14 +7,24 @@ use App\User;
 use App\Categorie;
 use Faker\Generator as Faker;
 
-$factory->define(Post::class, function (Faker $faker) {
-    $image = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
-    $title = $faker->sentence(rand(3, 6));
 
+$factory->define(Post::class, function (Faker $faker) {
+    $dir = scandir(storage_path('app\public\images\fake'));
+    $images = array_diff($dir, array('..', '.'));
+    $title = $faker->sentence(rand(3, 6));
+    static $index_image = 2;
+
+    $rand = rand(3, 10);
+    $body = '';
+
+    for ($i = 0; $i < $rand; $i++) { 
+        $body .= '<p>' . $faker->paragraph(5 , true) . '</p>';
+    }
+    
     return [
         'title'   => $title,
-        'body'    => $faker->paragraphs(rand(2, 7), true),
-        'image'   => $image[rand(0,4)],
+        'body'    => $body,
+        'image'   => 'fake/' . $images[$index_image++],
         'slug'    => Str::slug($title),
         'user_id' => User::all()->random()->id,
         'cat_id'  => Categorie::all()->random()->id
