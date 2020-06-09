@@ -1,10 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700&display=swap);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Inria+Sans:400,700&display=swap);@charset "UTF-8";
 
 /* 0.1. Body / Typography
    ========================================================================== */
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Inria Sans", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -23,7 +23,7 @@ h5,
 h6 {
   color: #3d405c;
   margin: 0px 0px 15px 0px;
-  font-family: "Lato", sans-serif;
+  font-family: "Inria Sans", sans-serif;
 }
 
 h1 {
@@ -2050,7 +2050,7 @@ Pageheader
   padding: 31px 15px;
   text-align: center;
   left: 10px;
-  font-family: "Lato";
+  font-family: "Inria Sans";
   color: #fff;
 }
 
@@ -2115,7 +2115,7 @@ Pageheader
   right: 0;
   font-size: 16px;
   color: #3d405c;
-  font-family: "Lato";
+  font-family: "Inria Sans";
   line-height: 1;
 }
 
@@ -2374,7 +2374,7 @@ input[type=radio] {
   text-align: center;
   color: #333;
   font-size: 13px;
-  font-family: "Lato";
+  font-family: "Inria Sans";
   line-height: 1.6;
   transform: translateX(-100%);
   -webkit-user-select: none;
@@ -4148,7 +4148,7 @@ Pills vertical
 .table thead th,
 .table th {
   color: #3d405c;
-  font-family: "Lato";
+  font-family: "Inria Sans";
 }
 
 .table-bordered {
@@ -4178,7 +4178,7 @@ tr.group,
 tr.group:hover {
   background-color: #5969ff !important;
   color: #fff;
-  font-family: "Lato";
+  font-family: "Inria Sans";
   font-size: 18px;
 }
 
