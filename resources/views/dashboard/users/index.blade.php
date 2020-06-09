@@ -1,11 +1,26 @@
-@extends('layouts.dashboard.master')
+@extends('layouts.dashboard.main')
 
 @section('title', 'Users')
 
 @section('dashboard-body')
 
+@if(session('success'))
+    @push('scripts')
+        <script>
+            window.addEventListener('load', function() {
+                Swal.fire({
+                    position         : 'center',
+                    icon             : 'success',
+                    title            : '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer            : 2000
+                })
+            })
+        </script>
+    @endpush
+@endif
+
 <div class="container-fluid">
-    @include('_alert')
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -30,15 +45,14 @@
                     @foreach ($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->getRoleNames()->first() }}</td>
                         <td>{{ $user->created_at->format('d-m-Y') }}</td>
                         <td class="text-center">
-                            <a href=""><i class="fas fa-eye btn-show"></i></a>
-                            <a href="{{ route('dashboard.users.edit', $user) }}"><i class="fas fa-user-edit btn-edit"></i></a>
-                            <a href="#"><i class="fas fa-trash btn-delete"></i></a>
-
+                            <a href="{{ route('profile.show', $user) }}" target="_blank"><i class="fas fa-eye btn-show"></i></a>
+                            <a href="{{ route('profile.edit', $user) }}" target="_blank"><i class="fas fa-user-edit btn-edit"></i></a>
+                            <a href="" class="btn-delete"><i class="fas fa-trash"></i></a>
                             <form action="{{ route('dashboard.users.destroy', $user) }}" style="display: none;" method="POST">
                                 @csrf
                                 @method('DELETE')

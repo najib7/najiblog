@@ -1,6 +1,6 @@
-@extends('layouts.dashboard.master')
+@extends('layouts.dashboard.main')
 
-@section('content')
+@section('dashboard-body')
 <div class="container-fluid">
 
     <!-- 404 Error Text -->

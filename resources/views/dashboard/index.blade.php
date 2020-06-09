@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.master')
+@extends('layouts.dashboard.main')
 
 @section('dashboard-body')
 <div class="container-fluid">

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.auth.main')
 
 @section('content')
 <div class="row justify-content-center">

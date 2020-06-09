@@ -1,11 +1,10 @@
-@extends('layouts.dashboard.master')
+@extends('layouts.dashboard.main')
 
 @section('title', 'Comments')
 
 @section('dashboard-body')
 
 <div class="container-fluid">
-    @include('_alert')
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -29,13 +28,11 @@
                         <tr>
                             <td>{{ $comment->id }}</td>
                             <td width="50%" class="show-comment">{{ $comment->comment }}</td>
-                            <td>{{ $comment->user->name }}</td>
+                            <td>{{ $comment->user->username }}</td>
                             <td>{{ $comment->post->title }}</td>
                             <td>{{ $comment->created_at->format('d-m-Y') }}</td>
                             <td class="text-center">
-                                <a href="{{ route('comments.edit', $comment) }}"><i class="fas fa-user-edit btn-edit"></i></a>
-                                <a href="#"><i class="fas fa-trash btn-delete"></i></a>
-
+                                <a href="#" class="btn-delete"><i class="fas fa-trash"></i></a>
                                 <form action="{{ route('comments.destroy', $comment) }}" class="d-inline-block" method="POST">
                                     @csrf
                                     @method('DELETE')

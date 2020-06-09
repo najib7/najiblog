@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.master')
+@extends('layouts.dashboard.main')
 
 @section('title', 'Posts')
 
@@ -6,7 +6,7 @@
 
 
 <div class="container-fluid">
-    @include('_alert')
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h3 class="m-0 font-weight-bold text-primary float-left">All posts</h3>
@@ -31,14 +31,13 @@
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->created_at->format('d-m-Y') }}</td>
-                            <td>{{ $post->user->name }}</td>
+                            <td>{{ $post->user->username }}</td>
                             <td>{{ $post->category->name }}</td>
                             <td>{{ $post->comments->count() }}</td>
                             <td class="text-center">
                                 <a href="{{ route('posts.show', $post) }}"><i class="fas fa-eye btn-show"></i></a>
                                 <a href="{{ route('posts.edit', $post) }}"><i class="fas fa-user-edit btn-edit"></i></a>
-                                <a href="#"><i class="fas fa-trash btn-delete"></i></a>
-
+                                <a href="#" class="btn-delete"><i class="fas fa-trash"></i></a>
                                 <form action="{{ route('posts.destroy', $post) }}" class="d-inline-block" method="POST">
                                     @csrf
                                     @method('DELETE')

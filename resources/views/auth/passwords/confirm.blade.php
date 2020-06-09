@@ -1,14 +1,13 @@
-@extends('layouts.master')
+@extends('layouts.auth.main')
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md-8">
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
         <div class="card">
-            <div class="card-header">{{ __('Confirm Password') }}</div>
+            <div class="card-header">Please confirm your password before continuing.</div>
 
             <div class="card-body">
-                {{ __('Please confirm your password before continuing.') }}
-
+                
                 <form method="POST" action="{{ route('password.confirm') }}">
                     @csrf
 
@@ -33,12 +32,6 @@
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Confirm Password') }}
                             </button>
-
-                            @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
-                            </a>
-                            @endif
                         </div>
                     </div>
                 </form>
