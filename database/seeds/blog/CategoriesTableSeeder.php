@@ -21,7 +21,7 @@ class CategoriesTableSeeder extends Seeder
             $table->insert([
                 'name'        => $categorie,
                 'slug'        => $categorie,
-                'description' => $faker->paragraph(3, true) // just for test
+                'description' => $faker->paragraph(1, true) // just for test
             ]);
         }
     }
