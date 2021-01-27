@@ -1,7 +1,7 @@
 @extends('layouts.auth.main')
 
 @section('content')
-<div class="container py-5">
+<div class="container py-2">
     <div class="row">
         <div class="col-lg-6 mx-auto">
             <div class="card border-primary">
@@ -54,7 +54,68 @@
 
                 </div>
             </div>
+
+            <table class="table table-bordered demo-users-table mt-3">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="demo-users-body"></tbody>
+            </table>
         </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    window.addEventListener('load', function() {
+        let users = [
+            {
+                name: 'admin',
+                email: 'admin@lagmah.com',
+                password: 'password$$',
+                role: 'admin',
+            },
+            {
+                name: 'author',
+                email: 'author@lagmah.com',
+                password: 'password$$',
+                role: 'author',
+            },
+            {
+                name: 'user',
+                email: 'user@lagmah.com',
+                password: 'password$$',
+                role: 'standard',
+            },
+        ]
+
+        users.forEach((e, index) => {
+            $('#demo-users-body').append(`
+                <tr>
+                    <td>${e.role}</td>
+                    <td>${e.email}</td>
+                    <td>${e.password}</td>
+                    <td class="full-width">
+                        <a class="text-danger demo-copy" href="" data-index="${index}">Copy</a>
+                    </td>
+                </tr>
+            `)
+        })
+        
+        $('.demo-copy').on('click', function (event) {
+            event.preventDefault()
+            const index = $(this).data('index')
+            const user = users[index]
+
+            $('#email').val(user.email)
+            $('#password').val(user.password)
+        })
+    })
+</script>
+@endpush

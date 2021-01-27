@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 
 
 $factory->define(Post::class, function (Faker $faker) {
-    $dir = scandir(storage_path('app\public\images\fake'));
+    $dir = scandir(public_path('storage/images/fake'));
     $images = array_diff($dir, array('..', '.'));
     $title = $faker->sentence(rand(3, 6));
     static $index_image = 2;
