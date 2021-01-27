@@ -6,6 +6,7 @@ foreach (config('blog.pin_posts') as $key => $value) {
 
 @endphp
 
+@if ($silderPosts[0])
 <div class="container mb-5 d-none d-md-block d-lg-block z-depth-1">
     <div id="carousel" class="carousel slide" data-ride="carousel" style="height: 400px">
         <ol class="carousel-indicators">
@@ -16,7 +17,7 @@ foreach (config('blog.pin_posts') as $key => $value) {
         <div class="carousel-inner h-100">
             @foreach ($silderPosts as $post)
             <div class="carousel-item view overlay h-100 @if($loop->index == 0) active @endif">
-                <img class="d-block w-100 h-100" src="{{ url('storage/images/' . $post->image) }}" alt="First
+                <img class="d-block w-100 h-100" src="{{ $post ? url('storage/images/' . $post->image) : '' }}" alt="First
                     slide">
                 <a href="{{ route('posts.show', $post) }}">
                     <div class="mask waves-effect waves-light rgba-white-slight"></div>
@@ -37,3 +38,4 @@ foreach (config('blog.pin_posts') as $key => $value) {
         </a>
     </div>
 </div>
+@endif
