@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesAndPermissionsSeeder::class,
-
-            // UsersTableSeeder::class,
-
+            FirstUsersSeeder::class,
             CategoriesTableSeeder::class,
 
-            // PostsTableSeeder::class,
+            // fake data
+            UsersTableSeeder::class,
+            PostsTableSeeder::class,
         ]);
     }
 }
